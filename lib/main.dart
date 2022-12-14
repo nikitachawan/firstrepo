@@ -23,6 +23,7 @@ class AboutPage extends StatelessWidget {
           leading: Builder(builder: (ctx) {
             return IconButton(
               onPressed: () {
+                ///open drawer using scafffold
                 Scaffold.of(ctx).openDrawer();
               },
               icon: Icon(
