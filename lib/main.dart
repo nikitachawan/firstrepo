@@ -79,6 +79,9 @@ class AboutPage extends StatelessWidget {
             ],
           ),
         ),
+        onDrawerChanged: (val) {
+          print('on drawer change: $val');
+        },
       ),
     );
   }
