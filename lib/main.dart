@@ -15,9 +15,17 @@ class AboutPage extends StatelessWidget {
             'About Page',
           ),
           actions: [
-            Icon(
-              Icons.home,
-              color: Colors.white,
+            Builder(
+              builder: (ctx) {
+                return IconButton(
+                  onPressed: () {
+                    Scaffold.of(ctx).openEndDrawer();
+                  },
+                  icon: Icon(
+                    Icons.menu_book,
+                  ),
+                );
+              },
             ),
           ],
           leading: Builder(builder: (ctx) {
@@ -41,10 +49,26 @@ class AboutPage extends StatelessWidget {
         drawer: Drawer(
           child: ListView(
             children: [
-              Icon(
-                Icons.image,
-                color: Colors.red,
-                size: 50,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(
+                    Icons.image,
+                    color: Colors.red,
+                    size: 50,
+                  ),
+                  Builder(builder: (ctx) {
+                    return IconButton(
+                      onPressed: () {
+                        Scaffold.of(ctx).closeDrawer();
+                      },
+                      icon: Icon(
+                        Icons.close,
+                        color: Colors.red,
+                      ),
+                    );
+                  })
+                ],
               ),
               Text(
                 'Full Name',
@@ -82,6 +106,41 @@ class AboutPage extends StatelessWidget {
         onDrawerChanged: (val) {
           print('on drawer change: $val');
         },
+        endDrawer: Drawer(
+          child: ListView(
+            children: [
+              UserAccountsDrawerHeader(
+                accountName: Text(
+                  'Account Name',
+                ),
+                accountEmail: Text(
+                  'youremail@gmail.com',
+                ),
+                currentAccountPicture: CircleAvatar(
+                  child: Text('Image'),
+                ),
+              ),
+            ],
+          ),
+        ),
+        persistentFooterButtons: [
+          OutlinedButton(
+            onPressed: () {},
+            child: Text('Home'),
+          ),
+          OutlinedButton(
+            onPressed: () {},
+            child: Text('Profile'),
+          ),
+          OutlinedButton(
+            onPressed: () {},
+            child: Text('Setting'),
+          ),
+        ],
+        bottomNavigationBar: Container(
+          height: 80,
+          color: Colors.blue,
+        ),
       ),
     );
   }
