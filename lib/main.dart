@@ -15,10 +15,17 @@ class AboutPage extends StatelessWidget {
             'About Page',
           ),
           actions: [
-            Icon(
+            Builder(builder: (ctx) {
+              return ElevatedButton(
+                onPressed: () {
+                  Scaffold.of(ctx).openEndDrawer();
+                },
+                child: Icon(
               Icons.home,
               color: Colors.white,
             ),
+              );
+            }),
           ],
           leading: Builder(builder: (ctx) {
             return IconButton(
@@ -41,10 +48,21 @@ class AboutPage extends StatelessWidget {
         drawer: Drawer(
           child: ListView(
             children: [
-              Icon(
-                Icons.image,
-                color: Colors.red,
-                size: 50,
+              Row(
+                children: [
+                  Icon(
+                    Icons.image,
+                    color: Colors.red,
+                    size: 50,
+                  ),
+                  Builder(builder: (context) {
+                    return OutlinedButton(
+                        onPressed: () {
+                          Scaffold.of(context).closeDrawer();
+                        },
+                        child: Icon(Icons.close));
+                  })
+                ],
               ),
               Text(
                 'Full Name',
@@ -78,6 +96,41 @@ class AboutPage extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        endDrawer: Drawer(
+          child: ListView(
+            children: [
+              UserAccountsDrawerHeader(
+                accountName: Text(
+                  "Account Name",
+                ),
+                accountEmail: Text(
+                  'youremail.com',
+                ),
+                currentAccountPicture: CircleAvatar(
+                  child: Text('Image'),
+                ),
+              ),
+            ],
+          ),
+        ),
+        persistentFooterButtons: [
+          OutlinedButton(
+            onPressed: () {},
+            child: Text('Home'),
+          ),
+          OutlinedButton(
+            onPressed: () {},
+            child: Text('Profile'),
+          ),
+          OutlinedButton(
+            onPressed: () {},
+            child: Text('Setting'),
+          ),
+        ],
+        bottomNavigationBar: Container(
+          height: 80,
+          color: Colors.blue,
         ),
       ),
     );
