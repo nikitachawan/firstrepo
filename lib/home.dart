@@ -5,6 +5,13 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor:Colors.green,
+      body:Center(
+        child:Text(
+          'Bottom Sheet'
+      )
+    )
+
   }
 }
