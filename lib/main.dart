@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:test_project/home.dart';
 
 void main() {
-  runApp(AboutPage());
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Home(),
+    );
+  }
 }
 
 class AboutPage extends StatelessWidget {
@@ -15,17 +26,18 @@ class AboutPage extends StatelessWidget {
             'About Page',
           ),
           actions: [
-            Builder(builder: (ctx) {
-              return ElevatedButton(
-                onPressed: () {
-                  Scaffold.of(ctx).openEndDrawer();
-                },
-                child: Icon(
-              Icons.home,
-              color: Colors.white,
+            Builder(
+              builder: (ctx) {
+                return IconButton(
+                  onPressed: () {
+                    Scaffold.of(ctx).openEndDrawer();
+                  },
+                  icon: Icon(
+                    Icons.menu_book,
+                  ),
+                );
+              },
             ),
-              );
-            }),
           ],
           leading: Builder(builder: (ctx) {
             return IconButton(
@@ -49,18 +61,23 @@ class AboutPage extends StatelessWidget {
           child: ListView(
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Icon(
                     Icons.image,
                     color: Colors.red,
                     size: 50,
                   ),
-                  Builder(builder: (context) {
-                    return OutlinedButton(
-                        onPressed: () {
-                          Scaffold.of(context).closeDrawer();
-                        },
-                        child: Icon(Icons.close));
+                  Builder(builder: (ctx) {
+                    return IconButton(
+                      onPressed: () {
+                        Scaffold.of(ctx).closeDrawer();
+                      },
+                      icon: Icon(
+                        Icons.close,
+                        color: Colors.red,
+                      ),
+                    );
                   })
                 ],
               ),
@@ -97,15 +114,18 @@ class AboutPage extends StatelessWidget {
             ],
           ),
         ),
+        onDrawerChanged: (val) {
+          print('on drawer change: $val');
+        },
         endDrawer: Drawer(
           child: ListView(
             children: [
               UserAccountsDrawerHeader(
                 accountName: Text(
-                  "Account Name",
+                  'Account Name',
                 ),
                 accountEmail: Text(
-                  'youremail.com',
+                  'youremail@gmail.com',
                 ),
                 currentAccountPicture: CircleAvatar(
                   child: Text('Image'),
